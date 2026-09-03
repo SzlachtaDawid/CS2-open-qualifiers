@@ -1,0 +1,15 @@
+# Ignore artifacts:
+coverage
+node_modules
+.next
+out
+build
+*.log
+.env*
+public
+
+# shadcn/ui generated components — keep them as the registry ships them
+components/ui
+
+# Markdown - formatted manually
+*.md

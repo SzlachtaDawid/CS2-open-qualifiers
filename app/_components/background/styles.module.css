@@ -1,0 +1,16 @@
+.dark_bottom {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(3, 0, 0, 0.5) 50%, rgba(0, 212, 255, 0) 100%);
+}
+
+.background_grid {
+  background-size: 90px 90px;
+  background-image:
+    linear-gradient(to right, #ffffff04 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff04 1px, transparent 1px);
+}
+
+.background_blue_orange {
+  background-image:
+    radial-gradient(60% 120% at 16% 62%, rgba(56, 189, 248, 0.28), transparent 75%),
+    radial-gradient(60% 120% at 84% 62%, rgba(251, 146, 60, 0.28), transparent 75%);
+}

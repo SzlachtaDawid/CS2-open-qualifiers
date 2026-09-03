@@ -1,0 +1,14 @@
+.arrow {
+  --arrow_line: rgba(159, 178, 198, 0.7);
+  display: block;
+  width: clamp(20px, 4vw, 60px);
+  height: 1px;
+
+  &.left {
+    background: linear-gradient(90deg, transparent, var(--arrow_line));
+  }
+
+  &.right {
+    background: linear-gradient(90deg, var(--arrow_line), transparent);
+  }
+}
