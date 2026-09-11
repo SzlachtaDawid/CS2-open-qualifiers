@@ -1,0 +1,11 @@
+.dark_bottom_full {
+  filter: brightness(75%);
+}
+
+.dark_space {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(3, 0, 0, 0.5) 50%, rgba(0, 212, 255, 0) 100%);
+}
+.face_fade_out {
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 90%);
+}

@@ -1,0 +1,57 @@
+/**
+ * Taśma jako pionowa krawędź sekcji.
+ *
+ * tape.webp jest poziomy (500×43), więc pionowy pasek powstaje z obrotu o 90°.
+ * Obracany jest pseudo-element, nie kontener: kontener musi zachować normalne
+ * pozycjonowanie przy krawędzi, a obrót zabrałby mu układ osi.
+ *
+ * Grubość idzie przez `--tape-width`, bo ta sama liczba występuje w czterech
+ * miejscach naraz (szerokość kontenera, wysokość paska, skala tła i przesunięcie
+ * po obrocie). Rozjechanie któregokolwiek z nich urywa taśmę albo wysuwa ją poza kadr.
+ */
+.tape {
+  --tape-width: 25px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--tape-width);
+  overflow: hidden;
+  /* dekoracja nie może przechwytywać kliknięć */
+  pointer-events: none;
+  /* mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%); */
+  /* taśma jest jaskrawsza niż paleta strony */
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.tape::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* długość paska przed obrotem = wysokość przypiętego panelu */
+  width: 100dvh;
+  height: var(--tape-width);
+  transform-origin: 0 0;
+  /* Sam rotate(90deg) wokół (0,0) mapuje (x, y) na (−y, x), więc pasek ląduje
+     w całości na ujemnym X i overflow go wycina. translateX o grubość taśmy
+     wsuwa go z powrotem do kontenera. Kolejność ma znaczenie: transformacje
+     składają się od prawej, czyli najpierw obrót, potem przesunięcie. */
+  transform: translateX(var(--tape-width)) rotate(90deg);
+  background-image: url("/images/tape.webp");
+  background-repeat: repeat-x;
+  background-size: auto var(--tape-width);
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+/* Przesunięty kadr, żeby prawa krawędź nie była kopią lewej co do piksela */
+.right::before {
+  background-position: -137px 0;
+}

@@ -8,7 +8,7 @@ export function Background() {
         <div className={cn("background_grid absolute inset-0", style.background_grid)} />
         <div className={cn("h-full w-full", style.background_blue_orange)} />
       </div>
-      <div className={cn("fixed bottom-0 z-2 h-1/2 w-full", style.dark_bottom)} />
+      <div className={cn("dark_bottom fixed bottom-0 z-2 h-1/2 w-full", style.dark_bottom)} />
     </>
   );
 }

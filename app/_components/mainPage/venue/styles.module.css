@@ -1,0 +1,30 @@
+/**
+ * Zdjęcie ma wtapiać się w tło, a nie leżeć na nim jako prostokąt.
+ *
+ * Dwie maski składane przez `intersect`: jedna gasi lewą i prawą krawędź, druga górną
+ * i dolną. Boki gasną mocniej i wcześniej, bo kadr jest panoramiczny i to właśnie pionowe
+ * krawędzie najbardziej zdradzają, że to wklejony prostokąt.
+ */
+.venue_photo {
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 76%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+
+  /* zdjęcie jest jaśniejsze i bardziej nasycone niż paleta strony — bez tego
+     wybija się z kadru nawet przy idealnie wygaszonych krawędziach */
+  filter: brightness(0.78) saturate(0.85) contrast(1.05);
+}
+
+/**
+ * Poświata pod zdjęciem — miękka plama w kolorach CT/TT, ta sama para co w tle strony.
+ * Zdjęcie z wygaszonymi krawędziami samo w sobie robi się płaskie; ta plama daje mu
+ * osadzenie, żeby wyglądało na oświetlone, a nie wycięte.
+ */
+.venue_glow {
+  background-image:
+    radial-gradient(70% 140% at 30% 50%, rgba(56, 189, 248, 0.18), transparent 70%),
+    radial-gradient(70% 140% at 70% 50%, rgba(251, 146, 60, 0.16), transparent 70%);
+  filter: blur(28px);
+}

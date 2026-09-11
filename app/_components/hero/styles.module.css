@@ -1,7 +1,0 @@
-.text_background_colors {
-  background: linear-gradient(90deg, rgb(191, 228, 251) 0%, rgb(255, 255, 255) 48%, rgb(255, 215, 163) 100%) text;
-}
-
-.dark_bottom_full {
-  filter: brightness(85%);
-}

@@ -3,6 +3,8 @@ import { Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Background } from "./_components/background/Background";
+import { ReactLenis } from "lenis/react";
+import { SmoothScroll } from "./_components/three/SmoothScroll";
 
 // globals.css maps --font-heading / --font-jetbrains onto Tailwind's font-heading and font-sans.
 const barlowCondensed = Barlow_Condensed({
@@ -22,6 +24,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="pl" className={cn("h-full antialiased", barlowCondensed.variable, jetbrainsMono.variable)}>
       <body className="flex min-h-full flex-col font-sans">
         <Background />
+        <ReactLenis root options={{ autoRaf: false }} />
+        <SmoothScroll />
         {children}
       </body>
     </html>

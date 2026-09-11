@@ -1,14 +1,18 @@
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type Props = {
   text: string;
   variant: "ct" | "tt";
+  /** Dokąd prowadzi. Domyślne "#" zostawia przycisk bez nawigacji. */
+  href?: string;
 };
 
-const Button = ({ text, variant }: Props) => {
+const Button = ({ text, variant, href = "#" }: Props) => {
   return (
-    <a
-      href="#"
+    // next/link zamiast <a>: nawigacja po stronie klienta i prefetch trasy formularza
+    <Link
+      href={href}
       role="button"
       className={cn(
         "min-w-[300] border bg-white/5 p-4 text-center uppercase",
@@ -17,7 +21,7 @@ const Button = ({ text, variant }: Props) => {
       )}
     >
       {text}
-    </a>
+    </Link>
   );
 };
 

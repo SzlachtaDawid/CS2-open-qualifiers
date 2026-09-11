@@ -18,6 +18,10 @@ describe("pickClip", () => {
     expect(pickClip(["stand", "ak_walk"], "ak_walk")).toBe("ak_walk");
   });
 
+  it("znajduje klip zwycięstwa używany w sekcji Prizes", () => {
+    expect(pickClip(["Jump", "win1", "stand", "ak_walk"], "win1")).toBe("win1");
+  });
+
   it("domyślnym klipem jest Jump", () => {
     expect(DEFAULT_CLIP).toBe("Jump");
   });

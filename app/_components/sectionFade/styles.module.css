@@ -1,0 +1,15 @@
+.fade {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background: linear-gradient(to bottom, transparent 0%, rgba(3, 0, 0, 0.5) 50%, rgb(0, 0, 0) 100%);
+
+  /* wariant górny: przyklejony do góry i wygaszany w drugą stronę */
+  &.top {
+    top: 0;
+    bottom: auto;
+    background: linear-gradient(to top, transparent 0%, rgba(3, 0, 0, 0.5) 50%, rgb(0, 0, 0) 100%);
+  }
+}
