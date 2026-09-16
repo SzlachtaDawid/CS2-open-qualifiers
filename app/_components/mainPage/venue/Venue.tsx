@@ -4,7 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ModelSceneCanvas } from "../../three/ModelSceneCanvas";
+import { ModelView } from "../../three/ModelView";
 import { TapeBorders } from "../../tape/TapeBorders";
 import { setScrollProgress } from "../../three/lib/scrollStore";
 import Text from "./Text";
@@ -43,9 +43,7 @@ const Venue = () => {
   return (
     <section ref={section} className="relative z-3 h-[240vh]">
       <div className="sticky top-0 grid h-dvh place-items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <ModelSceneCanvas sectionKey="venue" clip="stand" side="left" sideNumber={0.32} />
-        </div>
+        <ModelView sectionKey="venue" clip="stand" side="left" sideNumber={0.32} />
         <TapeBorders />
         <Text />
         <div className="pointer-events-none absolute inset-0 bg-white opacity-0" id="venue-whiteout" aria-hidden />

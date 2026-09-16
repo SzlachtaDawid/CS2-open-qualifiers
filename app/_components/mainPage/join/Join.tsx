@@ -4,7 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ModelSceneCanvas } from "../../three/ModelSceneCanvas";
+import { ModelView } from "../../three/ModelView";
 import { TapeBorders } from "../../tape/TapeBorders";
 import { setScrollProgress } from "../../three/lib/scrollStore";
 import Title from "../../copy/Title";
@@ -44,9 +44,7 @@ const Join = () => {
   return (
     <section ref={section} className="relative z-3 h-[460vh]">
       <div className="sticky top-0 flex h-dvh items-center justify-center">
-        <div className="absolute inset-0">
-          <ModelSceneCanvas sectionKey="join" clip="Jump" side="right" rotationOffset={FACING.sideLeft} />
-        </div>
+        <ModelView sectionKey="join" clip="Jump" side="right" rotationOffset={FACING.sideLeft} />
 
         <TapeBorders />
         <div className="relative flex max-w-[600px] flex-col items-center px-8 text-center">

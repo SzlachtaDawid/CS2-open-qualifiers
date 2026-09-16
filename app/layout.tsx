@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Background } from "./_components/background/Background";
 import { ReactLenis } from "lenis/react";
 import { SmoothScroll } from "./_components/three/SmoothScroll";
+import { SceneCanvas } from "./_components/three/SceneCanvas";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Background />
         <ReactLenis root options={{ autoRaf: false }} />
         <SmoothScroll />
+        <SceneCanvas />
         {children}
       </body>
     </html>

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ModelSceneCanvas } from "../../three/ModelSceneCanvas";
+import { ModelView } from "../../three/ModelView";
 import { TapeBorders } from "../../tape/TapeBorders";
 import { setScrollProgress } from "../../three/lib/scrollStore";
 import { FACING } from "../../three/lib/scrollAnim";
@@ -44,15 +44,13 @@ const Prizes = () => {
   return (
     <section ref={section} className="relative z-3 h-[240vh]">
       <div className="sticky top-0 grid h-dvh place-items-center">
-        <div className="absolute inset-0">
-          <ModelSceneCanvas
-            sectionKey="prizes"
-            clip="win1"
-            side="right"
-            rotationOffset={FACING.sideRight}
-            sideNumber={0.2}
-          />
-        </div>
+        <ModelView
+          sectionKey="prizes"
+          clip="win1"
+          side="right"
+          rotationOffset={FACING.sideRight}
+          sideNumber={0.2}
+        />
         <TapeBorders />
         <Text />
         <div className="col-start-1 row-start-1 max-w-[900px] px-8 text-center" id="prizes-scene-rewards">

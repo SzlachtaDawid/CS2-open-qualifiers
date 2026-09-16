@@ -4,7 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ModelSceneCanvas } from "../../three/ModelSceneCanvas";
+import { ModelView } from "../../three/ModelView";
 import { TapeBorders } from "../../tape/TapeBorders";
 import { setScrollProgress } from "../../three/lib/scrollStore";
 import { SectionFade } from "../../sectionFade/SectionFade";
@@ -45,9 +45,7 @@ const AboutUs = () => {
     <section id="about" ref={section} className="relative z-3 h-[200vh]">
       <SectionFade side="top" height={150} />
       <div className="sticky top-0 flex h-dvh items-center justify-center">
-        <div className="absolute inset-0">
-          <ModelSceneCanvas sectionKey="about" clip="ak_walk" side="left" sideNumber={0.3} />
-        </div>
+        <ModelView sectionKey="about" clip="ak_walk" side="left" sideNumber={0.3} />
         <TapeBorders />
         <div className="relative flex max-w-[600px] flex-col items-center px-8 text-center">
           <Title copy="Something" coloredCopy="about Us" component="h2" id="about-heading" />
