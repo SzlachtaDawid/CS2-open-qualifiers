@@ -48,6 +48,11 @@
 }
 
 :root {
+  /* Fade to black at one edge. Same ramp in three places: the fixed page bottom
+     and both ends of SectionFade. */
+  --gradient-fade-down: linear-gradient(to bottom, transparent 0%, rgba(3, 0, 0, 0.5) 50%, rgb(0, 0, 0) 100%);
+  --gradient-fade-up: linear-gradient(to top, transparent 0%, rgba(3, 0, 0, 0.5) 50%, rgb(0, 0, 0) 100%);
+
   --background: oklch(0.174 0.014 243.8); /* tactical dark navy */
   --foreground: oklch(100% 0.00011 271.152);
   --card: oklch(0.214 0.02 248.8);

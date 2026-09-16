@@ -1,7 +1,7 @@
-import Describe from "../../copy/Describe";
-import Title from "../../copy/Title";
+import { Describe } from "../../copy/Describe";
+import { Title } from "../../copy/Title";
 
-const PrizesCopy = () => {
+export const PrizesCopy = () => {
   return (
     <>
       <Title copy="What you" coloredCopy="can win" component="h2" id="prizes-title" />
@@ -18,5 +18,3 @@ const PrizesCopy = () => {
     </>
   );
 };
-
-export default PrizesCopy;

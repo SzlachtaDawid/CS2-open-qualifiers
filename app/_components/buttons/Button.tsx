@@ -13,7 +13,7 @@ type Props = {
 const isHash = (href: string) => href.startsWith("#");
 const isExternal = (href: string) => /^https?:\/\//.test(href);
 
-const Button = ({ text, variant, href }: Props) => {
+export const Button = ({ text, variant, href }: Props) => {
   const lenis = useLenis();
 
   const className = cn(
@@ -53,5 +53,3 @@ const Button = ({ text, variant, href }: Props) => {
     </Link>
   );
 };
-
-export default Button;

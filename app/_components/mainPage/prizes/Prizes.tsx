@@ -6,16 +6,21 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { StickyScene } from "../../stickyScene/StickyScene";
 import { useSectionScrub } from "../../three/useSectionScrub";
-import Describe from "../../copy/Describe";
-import PrizesCopy from "./PrizesCopy";
+import { useReducedMotion } from "@/lib/useReducedMotion";
+import { Describe } from "../../copy/Describe";
+import { PrizesCopy } from "./PrizesCopy";
 
-const Prizes = () => {
+export const Prizes = () => {
   const section = useRef<HTMLElement>(null);
+
+  const reducedMotion = useReducedMotion();
 
   useSectionScrub("prizes", section);
 
   useGSAP(
     () => {
+      if (reducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom bottom", scrub: true },
       });
@@ -28,7 +33,7 @@ const Prizes = () => {
         .from("#prizes-scene-rewards", { y: 200, opacity: 0, ease: "none", duration: 0.5 })
         .to({}, { duration: 1.5 });
     },
-    { scope: section }
+    { scope: section, dependencies: [reducedMotion] }
   );
 
   return (
@@ -56,5 +61,3 @@ const Prizes = () => {
     </StickyScene>
   );
 };
-
-export default Prizes;

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import style from "../styles.module.css";
 
-const Faces = () => {
+export const Faces = () => {
   return (
     <>
       <div className={cn(style.dark_bottom_full, style.face_fade_out, "absolute bottom-[-100px] left-[-600px]")}>
@@ -14,5 +14,3 @@ const Faces = () => {
     </>
   );
 };
-
-export default Faces;

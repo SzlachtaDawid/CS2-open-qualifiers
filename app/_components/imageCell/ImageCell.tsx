@@ -7,7 +7,7 @@ type Props = {
   id?: string;
 };
 
-const ImageCell = ({ src, copy, alt, id }: Props) => {
+export const ImageCell = ({ src, copy, alt, id }: Props) => {
   return (
     <div className="flex h-[100px] w-[100px] flex-col items-center justify-center gap-2 border bg-white/5" id={id}>
       <Image alt={alt} src={src} height={50} width={50} />
@@ -15,5 +15,3 @@ const ImageCell = ({ src, copy, alt, id }: Props) => {
     </div>
   );
 };
-
-export default ImageCell;

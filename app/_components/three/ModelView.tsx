@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import type { ModelViewProps } from "./ModelViewScene";
 import { NARROW_BREAKPOINT_PX } from "./lib/placement";
 import { useMediaQuery } from "@/lib/useMediaQuery";
+import { SceneErrorBoundary } from "./SceneErrorBoundary";
 
 const ModelViewScene = dynamic(() => import("./ModelViewScene"), { ssr: false });
 
@@ -16,5 +17,9 @@ export function ModelView(props: ModelViewProps) {
   // useGLTF.preload at module scope, so importing it at all fetches cs2.glb (2.4 MB).
   if (!isWideEnough) return null;
 
-  return <ModelViewScene {...props} />;
+  return (
+    <SceneErrorBoundary>
+      <ModelViewScene {...props} />
+    </SceneErrorBoundary>
+  );
 }

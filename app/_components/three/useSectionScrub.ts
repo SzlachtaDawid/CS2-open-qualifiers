@@ -3,12 +3,17 @@
 import type { RefObject } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { setScrollProgress, type SectionKey } from "./lib/scrollStore";
 
 type Options = {
   start?: string;
   end?: string;
 };
+
+// Mid-sweep pose for visitors who asked for no animation: mid-stride, mid-jump,
+// mid-celebration — all read better than the first frame of a clip.
+const STATIC_PROGRESS = 0.5;
 
 /**
  * Feeds a section's 0-1 scroll progress into the store for the 3D layer to read.
@@ -21,8 +26,15 @@ export function useSectionScrub(
   section: RefObject<HTMLElement | null>,
   { start = "-5% center", end = "bottom center" }: Options = {}
 ) {
+  const reducedMotion = useReducedMotion();
+
   useGSAP(
     () => {
+      if (reducedMotion) {
+        setScrollProgress(sectionKey, STATIC_PROGRESS);
+        return;
+      }
+
       ScrollTrigger.create({
         trigger: section.current,
         start,
@@ -30,6 +42,6 @@ export function useSectionScrub(
         onUpdate: (self) => setScrollProgress(sectionKey, self.progress),
       });
     },
-    { scope: section, dependencies: [sectionKey, start, end] }
+    { scope: section, dependencies: [sectionKey, start, end, reducedMotion] }
   );
 }

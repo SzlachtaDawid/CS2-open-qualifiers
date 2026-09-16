@@ -1,7 +1,7 @@
-import Arrow from "@/app/_components/arrows/Arrow";
-import Title from "@/app/_components/copy/Title";
+import { Arrow } from "@/app/_components/arrows/Arrow";
+import { Title } from "@/app/_components/copy/Title";
 
-const Header = () => {
+export const Header = () => {
   return (
     <header className="mt-15 flex flex-col items-center text-center text-shadow-lg">
       <div className="my-2 flex items-center gap-4 text-xs tracking-widest">
@@ -13,5 +13,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

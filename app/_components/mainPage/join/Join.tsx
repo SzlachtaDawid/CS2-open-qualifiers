@@ -5,22 +5,27 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { StickyScene } from "../../stickyScene/StickyScene";
 import { useSectionScrub } from "../../three/useSectionScrub";
-import Title from "../../copy/Title";
-import Describe from "../../copy/Describe";
-import Button from "../../buttons/Button";
+import { useReducedMotion } from "@/lib/useReducedMotion";
+import { Title } from "../../copy/Title";
+import { Describe } from "../../copy/Describe";
+import { Button } from "../../buttons/Button";
 
 const SIGN_UP_ROUTE = "/register";
 
 // The section is tall enough that a full sweep would finish long before it ends.
 const JOIN_PROGRESS_SCALE = 0.7;
 
-const Join = () => {
+export const Join = () => {
   const section = useRef<HTMLElement>(null);
+
+  const reducedMotion = useReducedMotion();
 
   useSectionScrub("join", section, { start: "10% bottom", end: "bottom bottom" });
 
   useGSAP(
     () => {
+      if (reducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom bottom", scrub: true },
       });
@@ -31,7 +36,7 @@ const Join = () => {
         .from("#join-cta", { y: 200, opacity: 0, ease: "none", duration: 0.2 }, "-=0.25")
         .to({}, { duration: 1.5 });
     },
-    { scope: section }
+    { scope: section, dependencies: [reducedMotion] }
   );
 
   return (
@@ -65,5 +70,3 @@ const Join = () => {
     </StickyScene>
   );
 };
-
-export default Join;

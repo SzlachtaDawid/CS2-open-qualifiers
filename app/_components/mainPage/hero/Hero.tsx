@@ -1,16 +1,16 @@
-import Button from "../../buttons/Button";
-import Faces from "./components/Faces";
-import Describe from "../../copy/Describe";
+import { Button } from "../../buttons/Button";
+import { Faces } from "./components/Faces";
+import { Describe } from "../../copy/Describe";
 import { SectionFade } from "../../sectionFade/SectionFade";
-import Header from "./components/Header";
-import ImageCell from "../../imageCell/ImageCell";
+import { Header } from "./components/Header";
+import { ImageCell } from "../../imageCell/ImageCell";
 
 const ABOUT_ANCHOR = "#about";
 const BAIL_OUT_URL = "https://www.youtube.com";
 
 export function Hero() {
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative">
       <div className="relative z-3 flex min-h-dvh flex-col justify-center p-8">
         <Header />
         <Describe copy="128 teams, one bracket. Thirteen rounds take the map, two maps take the series. Win seven times and the trophy is yours." />

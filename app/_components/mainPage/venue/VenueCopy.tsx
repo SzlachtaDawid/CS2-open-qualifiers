@@ -1,7 +1,7 @@
-import Describe from "../../copy/Describe";
-import Title from "../../copy/Title";
+import { Describe } from "../../copy/Describe";
+import { Title } from "../../copy/Title";
 
-const VenueCopy = () => {
+export const VenueCopy = () => {
   return (
     <>
       <Title copy="Where we" coloredCopy="play" component="h2" id="venue-title" firstLetterId="venue-zoom-letter" />
@@ -18,5 +18,3 @@ const VenueCopy = () => {
     </>
   );
 };
-
-export default VenueCopy;

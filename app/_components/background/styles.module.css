@@ -1,5 +1,5 @@
 .dark_bottom {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(3, 0, 0, 0.5) 50%, rgba(0, 212, 255, 0) 100%);
+  background: var(--gradient-fade-down);
 }
 
 .background_grid {

@@ -5,18 +5,23 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { StickyScene } from "../../stickyScene/StickyScene";
 import { useSectionScrub } from "../../three/useSectionScrub";
-import VenueCopy from "./VenueCopy";
+import { useReducedMotion } from "@/lib/useReducedMotion";
+import { VenueCopy } from "./VenueCopy";
 
 const LETTER_ZOOM = 170;
 const ZOOM_ORIGIN = "18% 25%";
 
-const Venue = () => {
+export const Venue = () => {
   const section = useRef<HTMLElement>(null);
+
+  const reducedMotion = useReducedMotion();
 
   useSectionScrub("venue", section);
 
   useGSAP(
     () => {
+      if (reducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom bottom", scrub: true },
       });
@@ -28,7 +33,7 @@ const Venue = () => {
         .to("#venue-zoom-letter", { scale: LETTER_ZOOM, transformOrigin: ZOOM_ORIGIN, ease: "none", duration: 3 }, "<")
         .to("#venue-whiteout", { opacity: 1, ease: "none", duration: 0.8 }, "-=1");
     },
-    { scope: section }
+    { scope: section, dependencies: [reducedMotion] }
   );
 
   return (
@@ -45,5 +50,3 @@ const Venue = () => {
     </StickyScene>
   );
 };
-
-export default Venue;

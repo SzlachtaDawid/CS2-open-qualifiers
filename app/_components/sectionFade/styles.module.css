@@ -4,11 +4,11 @@
   left: 0;
   bottom: 0;
   z-index: 2;
-  background: linear-gradient(to bottom, transparent 0%, rgba(3, 0, 0, 0.5) 50%, rgb(0, 0, 0) 100%);
+  background: var(--gradient-fade-down);
 
   &.top {
     top: 0;
     bottom: auto;
-    background: linear-gradient(to top, transparent 0%, rgba(3, 0, 0, 0.5) 50%, rgb(0, 0, 0) 100%);
+    background: var(--gradient-fade-up);
   }
 }

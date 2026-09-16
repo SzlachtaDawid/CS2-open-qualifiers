@@ -9,11 +9,5 @@ type SectionFadeProps = {
 
 /** Absolutely positioned — REQUIRES a `relative` parent or it attaches to one further up. */
 export function SectionFade({ side = "bottom", height = 120, className }: SectionFadeProps) {
-  return (
-    <div
-      aria-hidden
-      className={cn(style.fade, side === "top" && style.top, className)}
-      style={{ height }}
-    />
-  );
+  return <div aria-hidden className={cn(style.fade, side === "top" && style.top, className)} style={{ height }} />;
 }

@@ -59,11 +59,8 @@ export function ScrollButton({ className }: Props) {
   const scrollOneScreen = useCallback(() => {
     if (!lenis) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    lenis.scrollTo(lenis.targetScroll + window.innerHeight * 0.9, {
-      duration: 2,
-      immediate: reduced,
-    });
+    // Lenis forces immediate for programmatic scrolls under prefers-reduced-motion
+    lenis.scrollTo(lenis.targetScroll + window.innerHeight * 0.9, { duration: 2 });
   }, [lenis]);
 
   const handlePointerUp = useCallback(() => {

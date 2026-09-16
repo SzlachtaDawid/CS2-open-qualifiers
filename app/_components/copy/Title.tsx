@@ -7,7 +7,7 @@ type Props = {
   firstLetterId?: string;
 };
 
-const Title = ({ copy, coloredCopy, component: Tag = "h1", id, firstLetterId }: Props) => {
+export const Title = ({ copy, coloredCopy, component: Tag = "h1", id, firstLetterId }: Props) => {
   return (
     <Tag className="text-center text-5xl font-bold uppercase md:text-7xl lg:text-8xl" id={id}>
       {firstLetterId ? (
@@ -26,5 +26,3 @@ const Title = ({ copy, coloredCopy, component: Tag = "h1", id, firstLetterId }: 
     </Tag>
   );
 };
-
-export default Title;

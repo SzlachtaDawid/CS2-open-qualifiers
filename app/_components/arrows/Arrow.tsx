@@ -5,8 +5,6 @@ type Props = {
   direction: "left" | "right";
 };
 
-const Arrow = ({ direction }: Props) => {
+export const Arrow = ({ direction }: Props) => {
   return <span className={cn(style.arrow, direction === "left" ? style.left : style.right)} />;
 };
-
-export default Arrow;

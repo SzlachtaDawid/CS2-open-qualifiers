@@ -5,17 +5,22 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { StickyScene } from "../../stickyScene/StickyScene";
 import { useSectionScrub } from "../../three/useSectionScrub";
-import Title from "../../copy/Title";
-import Describe from "../../copy/Describe";
-import ImageCell from "../../imageCell/ImageCell";
+import { useReducedMotion } from "@/lib/useReducedMotion";
+import { Title } from "../../copy/Title";
+import { Describe } from "../../copy/Describe";
+import { ImageCell } from "../../imageCell/ImageCell";
 
-const AboutUs = () => {
+export const AboutUs = () => {
   const section = useRef<HTMLElement>(null);
+
+  const reducedMotion = useReducedMotion();
 
   useSectionScrub("about", section);
 
   useGSAP(
     () => {
+      if (reducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: { trigger: section.current, start: "15% bottom", end: "bottom bottom", scrub: true },
       });
@@ -28,7 +33,7 @@ const AboutUs = () => {
         .from("#team3", { x: -200, y: 200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
         .to({}, { duration: 1 });
     },
-    { scope: section }
+    { scope: section, dependencies: [reducedMotion] }
   );
 
   return (
@@ -63,5 +68,3 @@ const AboutUs = () => {
     </StickyScene>
   );
 };
-
-export default AboutUs;
