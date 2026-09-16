@@ -3,33 +3,37 @@
 import { Suspense } from "react";
 import { useThree } from "@react-three/fiber";
 import { Center, ContactShadows, View } from "@react-three/drei";
-import { ScrubbedPhoenixModel } from "./ScrubbedPhoenixModel";
+import { ScrollScrubbedModel, type ClipName } from "./ScrollScrubbedModel";
 import { modelPlacement, type Side } from "./lib/placement";
+import { type Facing } from "./lib/scrollAnim";
 import { type SectionKey } from "./lib/scrollStore";
 
 const GROUND_Y = -0.9;
 
 export type ModelViewProps = {
   sectionKey: SectionKey;
-  clip?: "Jump" | "win1" | "stand" | "ak_walk";
+  clip?: ClipName;
   side?: Side;
-  rotationOffset?: number;
-  turnOnModelRotation?: boolean;
-  sideNumber?: number;
+  /** How far off centre the model sits, as a fraction of the viewport width. */
+  sideOffset?: number;
+  facing?: Facing;
+  rotateOnScroll?: boolean;
+  progressScale?: number;
 };
 
-function PlacedModel({ sectionKey, clip, side, rotationOffset, turnOnModelRotation, sideNumber }: ModelViewProps) {
+function PlacedModel({ sectionKey, clip, side, sideOffset, facing, rotateOnScroll, progressScale }: ModelViewProps) {
   const { viewport, size } = useThree();
-  const { position, scale } = modelPlacement(viewport.width, viewport.height, size.width, side, sideNumber);
+  const { position, scale } = modelPlacement(viewport.width, viewport.height, size.width, side, sideOffset);
 
   return (
     <group position={position} scale={scale}>
       <Center>
-        <ScrubbedPhoenixModel
+        <ScrollScrubbedModel
           sectionKey={sectionKey}
           clip={clip}
-          rotationOffset={rotationOffset}
-          turnOnModelRotation={turnOnModelRotation}
+          facing={facing}
+          rotateOnScroll={rotateOnScroll}
+          progressScale={progressScale}
         />
       </Center>
       <ContactShadows position={[0, GROUND_Y, 0]} scale={8} blur={2.4} far={3} opacity={0.55} resolution={256} />

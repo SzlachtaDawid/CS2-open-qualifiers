@@ -1,9 +1,9 @@
 import Describe from "../../copy/Describe";
 import Title from "../../copy/Title";
 
-const Text = () => {
+const VenueCopy = () => {
   return (
-    <div className="col-start-1 row-start-1 max-w-[600px] px-8 text-center" id="venue-scene-text">
+    <>
       <Title copy="Where we" coloredCopy="play" component="h2" id="venue-title" firstLetterId="venue-zoom-letter" />
       <div className="max-w-[400px]">
         <Describe
@@ -15,8 +15,8 @@ const Text = () => {
           id="venue-doors"
         />
       </div>
-    </div>
+    </>
   );
 };
 
-export default Text;
+export default VenueCopy;

@@ -6,22 +6,32 @@ import { useFrame } from "@react-three/fiber";
 import { AnimationClip, AnimationMixer, type Group } from "three";
 import { clone as cloneSkinned } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { getScrollProgress, type SectionKey } from "./lib/scrollStore";
-import { clipTime, modelOffsetY, modelRotationY } from "./lib/scrollAnim";
+import { clipTime, FACING, modelOffsetY, modelRotationY, type Facing } from "./lib/scrollAnim";
 
 const MODEL_URL = "/models/cs2.glb";
 
+/** The clips that exist in cs2.glb. */
+export type ClipName = "Jump" | "win1" | "stand" | "ak_walk";
+
+// Stops short of the full sweep so the model is still turning when the section ends,
+// rather than sitting parked at the last pose.
+const ROTATION_SPAN = 0.8;
+
 type Props = {
   sectionKey: SectionKey;
-  clip?: string;
-  rotationOffset?: number;
-  turnOnModelRotation?: boolean;
+  clip?: ClipName;
+  facing?: Facing;
+  rotateOnScroll?: boolean;
+  /** How much of the animation the section's full scroll covers. 1 = all of it. */
+  progressScale?: number;
 };
 
-export function ScrubbedPhoenixModel({
+export function ScrollScrubbedModel({
   sectionKey,
   clip = "ak_walk",
-  rotationOffset = 0,
-  turnOnModelRotation = true,
+  facing = "front",
+  rotateOnScroll = true,
+  progressScale = 1,
 }: Props) {
   const { scene, animations } = useGLTF(MODEL_URL);
   const group = useRef<Group>(null);
@@ -55,16 +65,17 @@ export function ScrubbedPhoenixModel({
   }, [animations, clip, mixer]);
 
   useFrame(() => {
-    const progress = getScrollProgress(sectionKey);
+    const progress = getScrollProgress(sectionKey) * progressScale;
     mixer.setTime(clipTime(progress, duration.current, 1));
 
     const g = group.current;
     if (!g) return;
 
-    g.rotation.y = turnOnModelRotation ? modelRotationY(progress * 0.8, rotationOffset) : rotationOffset;
+    const base = FACING[facing];
+    g.rotation.y = rotateOnScroll ? modelRotationY(progress * ROTATION_SPAN, base) : base;
 
-    if (turnOnModelRotation) {
-      g.position.y = modelOffsetY(progress * 0.8);
+    if (rotateOnScroll) {
+      g.position.y = modelOffsetY(progress * ROTATION_SPAN);
     }
   });
 

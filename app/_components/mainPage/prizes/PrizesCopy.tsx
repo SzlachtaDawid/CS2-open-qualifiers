@@ -1,9 +1,9 @@
 import Describe from "../../copy/Describe";
 import Title from "../../copy/Title";
 
-const Text = () => {
+const PrizesCopy = () => {
   return (
-    <div className="col-start-1 row-start-1 max-w-[600px] px-8 text-center" id="prizes-scene-text">
+    <>
       <Title copy="What you" coloredCopy="can win" component="h2" id="prizes-title" />
       <div className="mx-auto max-w-[400px]">
         <Describe
@@ -15,8 +15,8 @@ const Text = () => {
           id="prize-skins"
         />
       </div>
-    </div>
+    </>
   );
 };
 
-export default Text;
+export default PrizesCopy;

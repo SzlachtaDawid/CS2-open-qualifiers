@@ -12,10 +12,10 @@ export function modelPlacement(
   viewportH: number,
   screenPx: number,
   side: Side = "left",
-  sideNumber: number = 0.25
+  sideOffset: number = 0.25
 ): Placement {
   const isNarrow = screenPx < NARROW_BREAKPOINT_PX;
-  const offsetX = viewportW * sideNumber * (side === "left" ? -1 : 1);
+  const offsetX = viewportW * sideOffset * (side === "left" ? -1 : 1);
 
   return {
     position: [isNarrow ? 0 : offsetX, -viewportH * 0.18, 0],
