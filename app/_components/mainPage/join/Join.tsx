@@ -12,7 +12,6 @@ import Describe from "../../copy/Describe";
 import Button from "../../buttons/Button";
 import { FACING } from "../../three/lib/scrollAnim";
 
-/** Trasa formularza zgłoszeniowego. Do podmiany, gdy powstanie właściwy route. */
 const SIGN_UP_ROUTE = "/register";
 
 const Join = () => {
@@ -20,66 +19,22 @@ const Join = () => {
 
   useGSAP(
     () => {
-      // Jedyne zadanie tego ScrollTriggera: przepisać postęp sekcji do store'a.
-      // Sama animacja dzieje się w useFrame wewnątrz canvasu.
       const trigger = ScrollTrigger.create({
         trigger: section.current,
         start: "10% bottom",
         end: "bottom bottom",
-        onUpdate: (self) => setScrollProgress("join", self.progress),
+        onUpdate: (self) => setScrollProgress("join", self.progress * 0.7),
       });
 
-      // Model wraca na prawą stronę, więc tekst znów wjeżdża z prawej.
-      gsap.from("#join-heading", {
-        x: 200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "top bottom",
-          end: "15% top",
-          scrub: true,
-        },
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom bottom", scrub: true },
       });
 
-      gsap.from("#join-roster", {
-        x: -200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "5% bottom",
-          end: "7% top",
-          scrub: true,
-        },
-      });
-
-      gsap.from("#join-slots", {
-        x: 200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "7% bottom",
-          end: "10% top",
-          scrub: true,
-        },
-      });
-
-      // CTA nie wjeżdża z boku — to ostatni element strony, ma się pojawić
-      // pod tekstem i urosnąć w miejscu, żeby nie wyglądał jak kolejny slajd.
-      gsap.from("#join-cta", {
-        y: 60,
-        scale: 0.92,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "10% bottom",
-          end: "13% top",
-          scrub: true,
-        },
-      });
+      tl.from("#join-heading", { x: -200, opacity: 0, ease: "none", duration: 0.5 })
+        .from("#join-roster", { x: 200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .from("#join-slots", { x: -200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .from("#join-cta", { y: 200, opacity: 0, ease: "none", duration: 0.2 }, "-=0.25")
+        .to({}, { duration: 1.5 });
 
       return () => trigger.kill();
     },
@@ -93,7 +48,6 @@ const Join = () => {
           <ModelSceneCanvas sectionKey="join" clip="Jump" side="right" rotationOffset={FACING.sideLeft} />
         </div>
 
-        {/* Taśmy po canvasie, a przed treścią — o warstwach decyduje kolejność w DOM */}
         <TapeBorders />
         <div className="relative flex max-w-[600px] flex-col items-center px-8 text-center">
           <Title copy="Jump" coloredCopy="on board" component="h2" id="join-heading" />

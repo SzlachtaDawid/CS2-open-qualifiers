@@ -6,7 +6,6 @@ import { Background } from "./_components/background/Background";
 import { ReactLenis } from "lenis/react";
 import { SmoothScroll } from "./_components/three/SmoothScroll";
 
-// globals.css maps --font-heading / --font-jetbrains onto Tailwind's font-heading and font-sans.
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -16,12 +15,12 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jet
 
 export const metadata: Metadata = {
   title: "CS2 Tournament",
-  description: "Turniej Counter-Strike 2 — zapisy drużyn.",
+  description: "Counter-Strike 2 tournament — team sign-ups.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pl" className={cn("h-full antialiased", barlowCondensed.variable, jetbrainsMono.variable)}>
+    <html lang="en" className={cn("h-full antialiased", barlowCondensed.variable, jetbrainsMono.variable)}>
       <body className="flex min-h-full flex-col font-sans">
         <Background />
         <ReactLenis root options={{ autoRaf: false }} />

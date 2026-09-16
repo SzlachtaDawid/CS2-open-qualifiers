@@ -1,5 +1,13 @@
+/* The -600px offsets are tuned for desktop, so on narrow screens both faces land
+   mid-frame and eat the text contrast — hence the much darker value below `md`. */
 .dark_bottom_full {
-  filter: brightness(75%);
+  filter: brightness(45%);
+}
+
+@media (min-width: 768px) {
+  .dark_bottom_full {
+    filter: brightness(75%);
+  }
 }
 
 .dark_space {

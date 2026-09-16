@@ -5,6 +5,9 @@ import { SectionFade } from "../../sectionFade/SectionFade";
 import Header from "./components/Header";
 import ImageCell from "../../imageCell/ImageCell";
 
+const ABOUT_ANCHOR = "#about";
+const BAIL_OUT_URL = "https://www.youtube.com";
+
 export function Hero() {
   return (
     <div className="relative overflow-x-clip">
@@ -12,10 +15,10 @@ export function Hero() {
         <Header />
         <Describe copy="128 teams, one bracket. Thirteen rounds take the map, two maps take the series. Win seven times and the trophy is yours." />
         <div className="mt-10 flex w-full flex-col items-center justify-center gap-8">
-          <Button text="Let’s do this!" variant="ct" />
-          <Button text="I’m chickening out." variant="tt" />
+          <Button text="Let’s do this!" variant="ct" href={ABOUT_ANCHOR} />
+          <Button text="I’m chickening out." variant="tt" href={BAIL_OUT_URL} />
           <div>
-            <h2 className="mb-4 text-center text-2xl">Sponsors</h2>
+            <h2 className="mb-4 text-center text-xl md:text-2xl">Sponsors</h2>
             <div className="flex gap-4">
               <ImageCell alt="Falcons logo" src="/images/falcons.webp" copy="Falcons" />
               <ImageCell alt="Faze logo" src="/images/faze.webp" copy="Faze" />
@@ -27,6 +30,10 @@ export function Hero() {
       <div className="relative">
         <Faces />
       </div>
+
+      {/* Readability layer: above the faces (z-2), below the content (z-3) */}
+      <div className="pointer-events-none absolute inset-0 z-2 bg-black/55 md:bg-black/20" aria-hidden />
+
       <SectionFade height={150} />
     </div>
   );

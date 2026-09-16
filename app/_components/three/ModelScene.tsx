@@ -7,7 +7,6 @@ import { ScrubbedPhoenixModel } from "./ScrubbedPhoenixModel";
 import { modelPlacement, type Side } from "./lib/placement";
 import { useScrollStore, type SectionKey } from "./lib/scrollStore";
 
-/** Wysokość cienia względem wyśrodkowanego modelu — mniej więcej stopy. */
 const GROUND_Y = -0.9;
 
 export type ModelSceneProps = {
@@ -19,17 +18,10 @@ export type ModelSceneProps = {
   sideNumber?: number;
 };
 
-/**
- * Most między store'em scrolla a trybem `frameloop="demand"`.
- *
- * Scena nie ma własnego zegara — cała animacja wynika z pozycji scrolla — więc klatka
- * jest potrzebna wyłącznie wtedy, gdy ta pozycja się zmieni. Porównanie po kluczu jest
- * istotne: bez niego scroll w jednej sekcji budziłby canvasy wszystkich pozostałych.
- */
+/** Compare per key: without it, scrolling one section wakes every other canvas. */
 function RenderOnScroll({ sectionKey }: { sectionKey: SectionKey }) {
   const invalidate = useThree((s) => s.invalidate);
 
-  // subscribe zwraca funkcję odsubskrybowania — useEffect sam ją wywoła przy odmontowaniu
   useEffect(
     () =>
       useScrollStore.subscribe((state, prev) => {
@@ -71,7 +63,6 @@ export default function ModelScene({
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 45 }}
-      // na Retinie devicePixelRatio = 2, czyli 4x więcej pikseli do wypełnienia
       dpr={[1, 1.5]}
       frameloop="demand"
     >

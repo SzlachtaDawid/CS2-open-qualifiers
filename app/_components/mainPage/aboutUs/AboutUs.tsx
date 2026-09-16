@@ -23,79 +23,18 @@ const AboutUs = () => {
         end: "bottom center",
         onUpdate: (self) => setScrollProgress("about", self.progress),
       });
-      gsap.from("#about-heading", {
-        x: -200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "top bottom",
-          end: "-10% top",
-          scrub: true,
-        },
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: section.current, start: "15% bottom", end: "bottom bottom", scrub: true },
       });
 
-      gsap.from("#about-organization", {
-        x: 200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "5% bottom",
-          end: "-5% top",
-          scrub: true,
-        },
-      });
-
-      gsap.from("#about-sponsors", {
-        x: -200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "10% bottom",
-          end: "top top",
-          scrub: true,
-        },
-      });
-
-      gsap.from("#team1", {
-        x: 200,
-        y: 200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "30% bottom",
-          end: "40% 50%",
-          scrub: true,
-        },
-      });
-
-      gsap.from("#team2", {
-        y: 200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "40% bottom",
-          end: "50% 60%",
-          scrub: true,
-        },
-      });
-
-      gsap.from("#team3", {
-        x: -200,
-        y: 200,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "50% bottom",
-          end: "60% 70%",
-          scrub: true,
-        },
-      });
+      tl.from("#about-heading", { x: -200, opacity: 0, ease: "none", duration: 0.5 })
+        .from("#about-organization", { x: 200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .from("#about-sponsors", { x: -200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .from("#team1", { x: 200, y: 200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .from("#team2", { y: 200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .from("#team3", { x: -200, y: 200, opacity: 0, ease: "none", duration: 0.5 }, "-=0.25")
+        .to({}, { duration: 1 });
 
       return () => trigger.kill();
     },
@@ -103,7 +42,7 @@ const AboutUs = () => {
   );
 
   return (
-    <section ref={section} className="relative z-3 h-[200vh]">
+    <section id="about" ref={section} className="relative z-3 h-[200vh]">
       <SectionFade side="top" height={150} />
       <div className="sticky top-0 flex h-dvh items-center justify-center">
         <div className="absolute inset-0">
@@ -123,7 +62,7 @@ const AboutUs = () => {
             />
           </div>
           <div className="mt-10">
-            <h3 className="mb-4 text-center text-2xl">Team</h3>
+            <h3 className="mb-4 text-center text-xl md:text-2xl">Team</h3>
             <div className="flex gap-4">
               <ImageCell src="/images/team1.webp" copy="Qoqu" alt="" id="team1" />
               <ImageCell src="/images/team2.webp" copy="PLaYson" alt="" id="team2" />

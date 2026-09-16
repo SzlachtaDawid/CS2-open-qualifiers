@@ -14,3 +14,9 @@
     radial-gradient(60% 120% at 16% 62%, rgba(56, 189, 248, 0.28), transparent 75%),
     radial-gradient(60% 120% at 84% 62%, rgba(251, 146, 60, 0.28), transparent 75%);
 }
+
+.background_photo {
+  opacity: 0.14;
+  filter: grayscale(0.55) contrast(1.1);
+  mask-image: radial-gradient(115% 100% at 50% 42%, #000 25%, transparent 85%);
+}

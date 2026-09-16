@@ -82,13 +82,11 @@ describe("clipTime", () => {
   });
 
   it("nigdy nie dobija dokładnie do granicy pętli", () => {
-    // Równe `duration` zawinęłoby mikser na pierwszą klatkę zamiast zostawić ostatnią
     expect(clipTime(1, 10, 1)).toBeLessThan(10);
     expect(clipTime(5, 10, 1)).toBeLessThan(10);
   });
 
   it("nie schodzi poniżej zera dla klipu o zerowej długości", () => {
-    // duration jest 0, dopóki .glb się nie doczyta — setTime(-0.0001) byłoby błędem
     expect(clipTime(1, 0, 1)).toBe(0);
   });
 });

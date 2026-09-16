@@ -8,7 +8,6 @@ import { ModelSceneCanvas } from "../../three/ModelSceneCanvas";
 import { TapeBorders } from "../../tape/TapeBorders";
 import { setScrollProgress } from "../../three/lib/scrollStore";
 import { FACING } from "../../three/lib/scrollAnim";
-import Title from "../../copy/Title";
 import Describe from "../../copy/Describe";
 import Image from "next/image";
 import Text from "./Text";
@@ -29,9 +28,12 @@ const Prizes = () => {
         scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom bottom", scrub: true },
       });
 
-      tl.from("#scene-text", { y: 60, opacity: 0, ease: "none", duration: 0.5 })
-        .to("#scene-text", { y: -200, opacity: 0, ease: "none", duration: 0.5 }, "+=3")
-        .from("#scene-prizes", { y: 200, opacity: 0, ease: "none", duration: 0.5 })
+      tl.from("#prizes-scene-text", { y: 60, opacity: 0, ease: "none", duration: 0.5 }, "+=1")
+        .from("#prizes-title", { x: -200, opacity: 0, ease: "none", duration: 1 })
+        .from("#prize-pool", { x: 200, opacity: 0, ease: "none", duration: 1 }, "-=0.25")
+        .from("#prize-skins", { x: -200, opacity: 0, ease: "none", duration: 1 }, "-=0.25")
+        .to("#prizes-scene-text", { y: -200, opacity: 0, ease: "none", duration: 0.5 }, "+=3")
+        .from("#prizes-scene-rewards", { y: 200, opacity: 0, ease: "none", duration: 0.5 })
         .to({}, { duration: 1.5 });
 
       return () => trigger.kill();
@@ -53,9 +55,8 @@ const Prizes = () => {
         </div>
         <TapeBorders />
         <Text />
-
-        <div className="col-start-1 row-start-1 max-w-[900px] px-8 text-center" id="scene-prizes">
-          <h3 className="mb-6 text-center text-2xl">Rewards</h3>
+        <div className="col-start-1 row-start-1 max-w-[900px] px-8 text-center" id="prizes-scene-rewards">
+          <h3 className="mb-6 text-center text-xl md:text-2xl">Rewards</h3>
           <div className="flex flex-col flex-wrap items-center justify-center gap-8">
             <div>
               <Image src="/images/skins.webp" width={500} height={400} alt="" className="h-auto w-[min(38vw,360px)]" />

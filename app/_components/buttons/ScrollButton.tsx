@@ -7,25 +7,15 @@ import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 import { useLenis } from "lenis/react";
 
-/** Prędkość przewijania przy przytrzymaniu, w pikselach na sekundę. */
-const HOLD_SPEED = 500;
+const HOLD_SPEED_PX_PER_S = 500;
 
-/** Po tylu milisekundach wciśnięcie przestaje być klikiem, a staje się trzymaniem. */
 const HOLD_AFTER_MS = 180;
 
 type Props = {
   className?: string;
 };
 
-/**
- * Przycisk przewijający stronę w dół: klik przesuwa o jeden ekran, przytrzymanie
- * jedzie płynnie, dopóki go nie puścisz.
- *
- * Scroll idzie przez Lenisa, a nie przez window.scrollTo — Lenis trzyma własną
- * pozycję docelową i dwóch piszących do niej naraz daje szarpanie. Pętla trzymania
- * wisi na `gsap.ticker`, czyli na tym samym zegarze, który napędza Lenisa; własny
- * requestAnimationFrame rozjeżdżałby się z nim o klatkę.
- */
+/** Scrolls via Lenis on gsap.ticker: a second writer or a separate rAF would judder. */
 export function ScrollButton({ className }: Props) {
   const holdTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const tick = useRef<((time: number, deltaTime: number) => void) | null>(null);
@@ -42,19 +32,16 @@ export function ScrollButton({ className }: Props) {
     }
   }, []);
 
-  // Bez tego callback tickera przeżywa odmontowanie i przewija stronę w nieskończoność
+  // Without this the ticker callback outlives unmount and scrolls forever
   useEffect(() => stop, [stop]);
 
   const startHold = useCallback(() => {
     if (!lenis) return;
 
-    // deltaTime z tickera GSAP jest w milisekundach.
-    // targetScroll, nie scroll: to pozycja, do której Lenis już zmierza, więc
-    // doliczanie do niej nie gubi dystansu między klatkami.
-    // immediate wyłącza wygładzanie — bez tego każda klatka startowałaby nowy
-    // tween do nowego celu i ruch by pulsował zamiast płynąć.
+    // targetScroll (not scroll) keeps the distance between frames; immediate stops each
+    // frame from starting a fresh tween, which would pulse instead of flow.
     const step = (_time: number, deltaTime: number) => {
-      lenis.scrollTo(lenis.targetScroll + (HOLD_SPEED * deltaTime) / 1000, { immediate: true });
+      lenis.scrollTo(lenis.targetScroll + (HOLD_SPEED_PX_PER_S * deltaTime) / 1000, { immediate: true });
     };
 
     tick.current = step;
@@ -80,7 +67,6 @@ export function ScrollButton({ className }: Props) {
   }, [lenis]);
 
   const handlePointerUp = useCallback(() => {
-    // Timeout jeszcze nie wystrzelił, czyli to było krótkie kliknięcie, nie trzymanie
     const wasClick = holdTimeout.current !== null;
     stop();
     if (wasClick) scrollOneScreen();
@@ -88,9 +74,7 @@ export function ScrollButton({ className }: Props) {
 
   const handleClick = useCallback(
     (event: React.MouseEvent) => {
-      // Klawiatura nie generuje pointerdown, więc Enter i spacja muszą trafić tutaj.
-      // detail === 0 odróżnia klik z klawiatury od tego wywołanego myszą, który
-      // obsłużył już handlePointerUp — bez tego strona przewijałaby się dwa razy.
+      // detail === 0 means keyboard: a mouse click was already handled by handlePointerUp
       if (event.detail === 0) scrollOneScreen();
     },
     [scrollOneScreen]
@@ -99,16 +83,15 @@ export function ScrollButton({ className }: Props) {
   return (
     <button
       type="button"
-      aria-label="Przewiń w dół"
+      aria-label="Scroll down"
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerCancel={stop}
       onPointerLeave={stop}
       onClick={handleClick}
       className={cn(
-        // touch-none: bez tego przytrzymanie na dotyku przewija stronę natywnie
-        // RÓWNOCZEŚNIE z naszą pętlą i strona ucieka dwa razy szybciej
-        "fixed right-6 bottom-6 z-50 flex size-12 touch-none items-center justify-center",
+        // touch-none: otherwise a touch hold scrolls natively alongside our loop
+        "fixed right-6 bottom-6 z-50 hidden size-12 touch-none items-center justify-center md:flex",
         "border bg-white/5 backdrop-blur-sm transition-colors hover:border-primary/80 hover:bg-primary/30",
         className
       )}

@@ -1,14 +1,5 @@
-/**
- * Taśma jako pionowa krawędź sekcji.
- *
- * tape.webp jest poziomy (500×43), więc pionowy pasek powstaje z obrotu o 90°.
- * Obracany jest pseudo-element, nie kontener: kontener musi zachować normalne
- * pozycjonowanie przy krawędzi, a obrót zabrałby mu układ osi.
- *
- * Grubość idzie przez `--tape-width`, bo ta sama liczba występuje w czterech
- * miejscach naraz (szerokość kontenera, wysokość paska, skala tła i przesunięcie
- * po obrocie). Rozjechanie któregokolwiek z nich urywa taśmę albo wysuwa ją poza kadr.
- */
+/* tape.webp is horizontal (500x43); the vertical strip comes from rotating the
+   pseudo-element, not the container, which must keep its normal axes. */
 .tape {
   --tape-width: 25px;
 
@@ -17,10 +8,7 @@
   bottom: 0;
   width: var(--tape-width);
   overflow: hidden;
-  /* dekoracja nie może przechwytywać kliknięć */
   pointer-events: none;
-  /* mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%); */
-  /* taśma jest jaskrawsza niż paleta strony */
   filter: brightness(0.85) saturate(0.9);
 }
 
@@ -29,14 +17,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  /* długość paska przed obrotem = wysokość przypiętego panelu */
+  /* length before rotation = height of the pinned panel */
   width: 100dvh;
   height: var(--tape-width);
   transform-origin: 0 0;
-  /* Sam rotate(90deg) wokół (0,0) mapuje (x, y) na (−y, x), więc pasek ląduje
-     w całości na ujemnym X i overflow go wycina. translateX o grubość taśmy
-     wsuwa go z powrotem do kontenera. Kolejność ma znaczenie: transformacje
-     składają się od prawej, czyli najpierw obrót, potem przesunięcie. */
+  /* rotate(90deg) about (0,0) maps (x, y) to (-y, x), putting the strip entirely on
+     negative X where overflow clips it; translateX slides it back in. Order matters. */
   transform: translateX(var(--tape-width)) rotate(90deg);
   background-image: url("/images/tape.webp");
   background-repeat: repeat-x;
@@ -51,7 +37,7 @@
   right: 0;
 }
 
-/* Przesunięty kadr, żeby prawa krawędź nie była kopią lewej co do piksela */
+/* Offset so the right edge is not a pixel-for-pixel copy of the left */
 .right::before {
   background-position: -137px 0;
 }

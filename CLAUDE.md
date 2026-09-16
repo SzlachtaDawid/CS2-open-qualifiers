@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project
 
 CS2 Tournament — a web app for a Counter-Strike 2 tournament: registration, login, team sign-up and
-a team list. UI copy is in Polish.
+a team list. **UI copy is in English** (`<html lang="en">`) — the landing targets the CS2 scene.
+Code comments are in English too. Test names stay in Polish, as they are today.
 
 The **priority is the 3D landing page**, not the tournament logic: a scroll-driven experience where
 CS2 character models move, the camera travels and text reveals as the user scrolls. Everything else
@@ -18,6 +19,25 @@ Conventions here are modelled on the owner's other project,
 `/Users/dawidszlachta/MotoSklejka/moto-sklejka-front` — same Next.js/TypeScript/Vitest setup and the
 same form conventions. **Two deliberate departures**: this project uses **shadcn/ui instead of daisyUI**,
 and it has **no CI pipeline**.
+
+## Comments
+
+**Write a comment only when it is genuinely necessary.** The default is no comment. Code that needs
+explaining should usually be renamed or restructured instead.
+
+A comment earns its place only when removing it would let someone plausibly "simplify" or "fix" the
+code into a bug — a non-obvious browser/library constraint, a workaround whose reason is invisible,
+a magic number nobody could re-derive. Keep it to one or two lines.
+
+Do **not** write comments that:
+
+- restate what the line already says (`// set the title`, `/** Scroll speed in px/s. */` above
+  `HOLD_SPEED`);
+- describe a prop that the prop name and type already describe;
+- narrate standard React/Next/GSAP behaviour (`// useEffect cleans this up on unmount`);
+- open a file or component with a summary of what it obviously is.
+
+Prefer a better name over a comment: `HOLD_SPEED_PX_PER_S` beats `HOLD_SPEED` plus a line of prose.
 
 ## Commands
 

@@ -30,10 +30,8 @@ export function ScrubbedPhoenixModel({
   const model = useMemo(() => {
     const cloned = cloneSkinned(scene);
 
-    // SkinnedMesh liczy bryłę otaczającą z pozy spoczynkowej, nie z animowanej.
-    // Przy pozie mocno odchodzącej od bind pose — a skok jest właśnie taka —
-    // three.js uznaje mesh za będący poza kadrem i wycina go, choć na ekranie
-    // powinien być widoczny. Na jednym modelu culling i tak nic nie oszczędza.
+    // SkinnedMesh derives its bounding box from the bind pose, so three.js culls the
+    // model mid-jump even though it is on screen.
     cloned.traverse((o) => {
       o.frustumCulled = false;
     });
@@ -63,8 +61,6 @@ export function ScrubbedPhoenixModel({
     const g = group.current;
     if (!g) return;
 
-    // Orientacja działa niezależnie od przemiatania: z wyłączonym obrotem model
-    // po prostu stoi w zadanej pozie, zamiast wracać do orientacji z pliku .glb.
     g.rotation.y = turnOnModelRotation ? modelRotationY(progress * 0.8, rotationOffset) : rotationOffset;
 
     if (turnOnModelRotation) {
