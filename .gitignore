@@ -42,5 +42,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# źródłowe modele 3D — do repo trafiają tylko skompresowane z public/models/
+# source 3D models — only the compressed ones in public/models/ go into the repo
 assets/

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 CS2 Tournament — a web app for a Counter-Strike 2 tournament: registration, login, team sign-up and
 a team list. **UI copy is in English** (`<html lang="en">`) — the landing targets the CS2 scene.
-Code comments are in English too. Test names stay in Polish, as they are today.
+**Everything in the repo is in English** — UI copy, code comments, test names, commit-worthy docs.
 
 The **priority is the 3D landing page**, not the tournament logic: a scroll-driven experience where
 CS2 character models move, the camera travels and text reveals as the user scrolls. Everything else
