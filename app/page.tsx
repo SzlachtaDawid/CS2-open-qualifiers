@@ -1,10 +1,10 @@
-import { AboutUs } from "./_components/mainPage/aboutUs/AboutUs";
-import { Hero } from "./_components/mainPage/hero/Hero";
-import { Prizes } from "./_components/mainPage/prizes/Prizes";
-import { Venue } from "./_components/mainPage/venue/Venue";
-import { Gallery } from "./_components/mainPage/gallery/Gallery";
-import { Join } from "./_components/mainPage/join/Join";
-import { ScrollButton } from "./_components/buttons/ScrollButton";
+import { AboutUs } from "@/app/components/mainPage/aboutUs/AboutUs";
+import { Hero } from "@/app/components/mainPage/hero/Hero";
+import { Prizes } from "@/app/components/mainPage/prizes/Prizes";
+import { Venue } from "@/app/components/mainPage/venue/Venue";
+import { Gallery } from "@/app/components/mainPage/gallery/Gallery";
+import { Join } from "@/app/components/mainPage/join/Join";
+import { ScrollButton } from "@/app/components/buttons/ScrollButton";
 
 export default function Home() {
   return (

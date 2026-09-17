@@ -2,8 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-@AGENTS.md
-
 ## Project
 
 CS2 Tournament — a web app for a Counter-Strike 2 tournament: registration, login, team sign-up and
@@ -65,6 +63,22 @@ as CSS variables (`@import "shadcn/tailwind.css"` plus `@theme inline`).
 from it. Removing it from `package.json` breaks the build with
 `Can't resolve 'shadcn/tailwind.css'`.
 
+### Where things live
+
+Next's "store project files in top-level folders inside of `app`" layout. Colocation is safe because
+a folder only becomes a route once it holds a `page.tsx` or `route.ts`.
+
+- `app/components/` — **every component we write**, including the whole `three/` layer and
+  `mainPage/` (the landing sections)
+- `app/lib/` — helpers and hooks; the only `lib` in the repo
+- `components/ui/` — the one thing outside `app`: shadcn registry output. Prettier-ignored, never
+  hand-edited
+
+`components.json` aliases point at `@/app/...` so `npx shadcn@latest add` writes `cn()` imports to
+the right place and does not recreate a root `lib/`. Only `ui` still points outside `app`.
+
+Cross-folder imports go through the `@/` alias, not `../../`.
+
 Add components with `npx shadcn@latest add <name>` (they land in `components/ui/`, which is
 Prettier-ignored so it stays as the registry ships it). Conditional classes go through `cn()` from
 `@/lib/utils`.
@@ -83,12 +97,15 @@ Intended architecture — **one `<Canvas>` fixed in the background, normal DOM s
 
 Rules that matter:
 
+- **All GSAP goes through `@/lib/gsap`**, which re-exports `gsap`, `ScrollTrigger` and `useGSAP`
+  after registering the plugins. Importing `gsap/ScrollTrigger` directly works only as long as that
+  module happens to load first; `no-restricted-imports` blocks it.
 - The canvas is client-only — mount it via `next/dynamic(..., { ssr: false })`. R3F cannot be
   server-rendered.
 - ScrollTrigger writes scroll progress into a zustand store **outside React**
   (`useScrollStore.setState`), and R3F reads it inside `useFrame` via `getState()`. Never through
   `useState` or a subscription — that would re-render 60×/second and destroy the frame rate.
-- Camera/animation maths belongs in **plain functions** (e.g. `app/_components/three/lib/`) so it is
+- Camera/animation maths belongs in **plain functions** (e.g. `app/components/three/placement.ts`) so it is
   testable in Vitest. jsdom has no WebGL, so the scene itself is never unit-tested.
 - `.glb` files go in `public/models/`, compressed with
   `npx @gltf-transform/cli optimize in.glb out.glb --compress meshopt --texture-compress webp`, then
@@ -130,3 +147,13 @@ The plan is Neon Postgres + Prisma 7 + next-auth v5 (Credentials), ported from M
 
 **Do not add a CI pipeline.** No GitHub Actions, no workflows — this is a deliberate choice by the
 repo owner.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

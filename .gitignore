@@ -43,4 +43,4 @@ yarn-error.log*
 next-env.d.ts
 
 # źródłowe modele 3D — do repo trafiają tylko skompresowane z public/models/
-app/_assets/*.glb
+assets/

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { Background } from "./_components/background/Background";
+import { cn } from "@/app/lib/utils";
+import { Background } from "@/app/components/background/Background";
 import { ReactLenis } from "lenis/react";
-import { SmoothScroll } from "./_components/three/SmoothScroll";
-import { SceneCanvas } from "./_components/three/SceneCanvas";
+import { SmoothScroll } from "@/app/components/three/SmoothScroll";
+import { SceneCanvas } from "@/app/components/three/SceneCanvas";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
