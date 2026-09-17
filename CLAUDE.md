@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-CS2 Tournament — a web app for a Counter-Strike 2 tournament: registration, login, team sign-up and
-a team list. **UI copy is in English** (`<html lang="en">`) — the landing targets the CS2 scene.
-**Everything in the repo is in English** — UI copy, code comments, test names, commit-worthy docs.
+CS2 Tournament — a web app for a Counter-Strike 2 tournament: team sign-up, a team list and, later,
+the bracket. **No user accounts or login** — teams register through a form, nothing more.
+
+**Everything in the repo is in English** — UI copy, code comments, test names, docs. The landing
+targets the CS2 scene, so `<html lang="en">`.
 
 The **priority is the 3D landing page**, not the tournament logic: a scroll-driven experience where
 CS2 character models move, the camera travels and text reveals as the user scrolls. Everything else
@@ -142,8 +144,8 @@ Server actions should re-validate with the same yup schema — do not trust clie
 
 ## Not set up yet
 
-Prisma, Neon, next-auth, the `Team`/`TeamMember` models and every route beyond `/` are still to come.
-The plan is Neon Postgres + Prisma 7 + next-auth v5 (Credentials), ported from MotoSklejka.
+Prisma, Neon, the `Team`/`TeamMember` models and every route beyond `/` are still to come.
+The plan is Neon Postgres + Prisma 7.
 
 **Do not add a CI pipeline.** No GitHub Actions, no workflows — this is a deliberate choice by the
 repo owner.

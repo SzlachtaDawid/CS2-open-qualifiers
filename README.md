@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CS2 Tournament
 
-## Getting Started
+A website for a Counter-Strike 2 tournament, and a project I use to grow as a developer.
+I build it to learn things I do not get to use every day — mainly the 3D layer, scroll-driven
+animation and performance work that comes with them.
 
-First, run the development server:
+## What it is
+
+The heart of the project is a **scroll-driven 3D landing page**. A single WebGL canvas sits
+fixed behind the page while five pinned sections scroll past it. A Counter-Strike character
+model is scrubbed by scroll position — a different animation clip per section, alternating
+sides of the frame — and the copy reveals as you go.
+
+The tournament features around it are deliberately conventional, so the effort goes where
+the learning is.
+
+## Built with
+
+- **Next.js 16** (App Router) and **React 19**, TypeScript throughout
+- **three.js**, **React Three Fiber** and **drei** for the 3D layer
+- **GSAP** with ScrollTrigger for the scroll timelines, **Lenis** for smooth scrolling
+- **zustand** to pass scroll progress to the render loop without re-rendering React
+- **Tailwind CSS v4** and **shadcn/ui**
+- **Vitest** and Testing Library for the parts that can be tested without WebGL
+
+## Roadmap
+
+The landing page is in place. What comes next:
+
+- [ ] **Team registration form** — five players per roster, validated with react-hook-form and yup
+- [ ] **Team list** — who has signed up so far
+- [ ] **Bracket** — the tournament tree, with match results feeding into it
+- [ ] **Matches** — schedule, scores and map picks
+- [ ] Persistence on Neon Postgres via Prisma
+
+## Running it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build     # production build
+npm run lint      # ESLint
+npx vitest run    # tests, one-shot
+npm run format    # Prettier
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Models
 
-## Learn More
+`public/models/cs2.glb` is the compressed model that ships with the site (2.4 MB, down from
+60.6 MB). Source models stay out of the repo — see `.gitignore`. Compression:
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx @gltf-transform/cli optimize in.glb out.glb --compress meshopt --texture-compress webp
+```
