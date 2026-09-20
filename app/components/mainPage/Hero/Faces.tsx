@@ -1,6 +1,6 @@
 import { cn } from "@/app/lib/utils";
 import Image from "next/image";
-import style from "../styles.module.css";
+import style from "./styles.module.css";
 
 export const Faces = () => {
   return (

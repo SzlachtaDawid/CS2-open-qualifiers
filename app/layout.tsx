@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/app/lib/utils";
-import { Background } from "@/app/components/background/Background";
+import { Background } from "@/app/components/Background/Background";
 import { ReactLenis } from "lenis/react";
 import { SmoothScroll } from "@/app/components/three/SmoothScroll";
 import { SceneCanvas } from "@/app/components/three/SceneCanvas";

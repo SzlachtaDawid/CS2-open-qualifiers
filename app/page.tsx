@@ -1,9 +1,9 @@
-import { AboutUs } from "@/app/components/mainPage/aboutUs/AboutUs";
-import { Hero } from "@/app/components/mainPage/hero/Hero";
-import { Prizes } from "@/app/components/mainPage/prizes/Prizes";
-import { Venue } from "@/app/components/mainPage/venue/Venue";
-import { Gallery } from "@/app/components/mainPage/gallery/Gallery";
-import { Join } from "@/app/components/mainPage/join/Join";
+import { AboutUs } from "@/app/components/mainPage/AboutUs/AboutUs";
+import { Hero } from "@/app/components/mainPage/Hero/Hero";
+import { Prizes } from "@/app/components/mainPage/Prizes/Prizes";
+import { Venue } from "@/app/components/mainPage/Venue/Venue";
+import { Gallery } from "@/app/components/mainPage/Gallery/Gallery";
+import { Join } from "@/app/components/mainPage/Join/Join";
 import { ScrollButton } from "@/app/components/buttons/ScrollButton";
 
 export default function Home() {

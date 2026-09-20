@@ -1,9 +1,9 @@
 import { Button } from "@/app/components/buttons/Button";
-import { Faces } from "./components/Faces";
+import { Faces } from "./Faces";
 import { Describe } from "@/app/components/copy/Describe";
-import { SectionFade } from "@/app/components/sectionFade/SectionFade";
-import { Header } from "./components/Header";
-import { ImageCell } from "@/app/components/imageCell/ImageCell";
+import { SectionFade } from "@/app/components/SectionFade/SectionFade";
+import { Header } from "./Header";
+import { ImageCell } from "@/app/components/ImageCell/ImageCell";
 
 const ABOUT_ANCHOR = "#about";
 const BAIL_OUT_URL = "https://www.youtube.com";

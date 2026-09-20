@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/app/lib/gsap";
-import { StickyScene } from "@/app/components/stickyScene/StickyScene";
+import { StickyScene } from "@/app/components/StickyScene/StickyScene";
 import { useSectionScrub } from "@/app/components/three/useSectionScrub";
 import { useReducedMotion } from "@/app/lib/useReducedMotion";
 import { VenueCopy } from "./VenueCopy";

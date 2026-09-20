@@ -1,9 +1,9 @@
 import type { ReactNode, Ref } from "react";
 import { cn } from "@/app/lib/utils";
-import { ModelView } from "../three/ModelView";
-import type { ModelViewProps } from "../three/ModelViewScene";
-import { TapeBorders } from "../tape/TapeBorders";
-import { SectionFade } from "../sectionFade/SectionFade";
+import { ModelView } from "@/app/components/three/ModelView";
+import type { ModelViewProps } from "@/app/components/three/ModelViewScene";
+import { TapeBorders } from "@/app/components/TapeBorders/TapeBorders";
+import { SectionFade } from "@/app/components/SectionFade/SectionFade";
 
 type Props = {
   ref?: Ref<HTMLElement>;

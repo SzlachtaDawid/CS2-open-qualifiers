@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/app/lib/gsap";
-import { StickyScene } from "@/app/components/stickyScene/StickyScene";
+import { StickyScene } from "@/app/components/StickyScene/StickyScene";
 import { useSectionScrub } from "@/app/components/three/useSectionScrub";
 import { useReducedMotion } from "@/app/lib/useReducedMotion";
 import { Title } from "@/app/components/copy/Title";
 import { Describe } from "@/app/components/copy/Describe";
-import { ImageCell } from "@/app/components/imageCell/ImageCell";
+import { ImageCell } from "@/app/components/ImageCell/ImageCell";
 
 export const AboutUs = () => {
   const section = useRef<HTMLElement>(null);

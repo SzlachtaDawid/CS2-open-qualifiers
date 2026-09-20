@@ -1,4 +1,4 @@
-import { Arrow } from "@/app/components/arrows/Arrow";
+import { Arrow } from "@/app/components/Arrow/Arrow";
 import { Title } from "@/app/components/copy/Title";
 
 export const Header = () => {
