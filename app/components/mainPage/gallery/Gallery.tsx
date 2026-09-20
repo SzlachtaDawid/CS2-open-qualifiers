@@ -14,7 +14,7 @@ const SLIDES = [
 
 const SLIDE_H_VH = 78;
 const GAP_VW = 4;
-const FALLBACK_ASPECT = 700 / 467;
+const FALLBACK_ASPECT = 1536 / 1024;
 const FALLBACK_VH = 100 + SLIDES.length * SLIDE_H_VH * FALLBACK_ASPECT;
 
 export const Gallery = () => {
@@ -71,7 +71,7 @@ export const Gallery = () => {
           {SLIDES.map((slide) => (
             <figure key={slide.src} className="shrink-0">
               {/* alt is empty on purpose — the figcaption already says this out loud */}
-              <Image src={slide.src} alt="" width={700} height={467} className="h-[78vh] w-auto max-w-none" />
+              <Image src={slide.src} alt="" width={1536} height={1024} className="h-[78vh] w-auto max-w-none" />
               <figcaption className="mt-4 text-sm text-neutral-900 uppercase">{slide.caption}</figcaption>
             </figure>
           ))}
