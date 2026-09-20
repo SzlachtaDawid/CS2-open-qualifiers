@@ -76,6 +76,12 @@ a folder only becomes a route once it holds a `page.tsx` or `route.ts`.
 - `components/ui/` — the one thing outside `app`: shadcn registry output. Prettier-ignored, never
   hand-edited
 
+**Folder names follow what the folder is.** A folder that holds one component takes that
+component's name in PascalCase (`Hero/Hero.tsx`, `TapeBorders/TapeBorders.tsx`), together with its
+`styles.module.css` and any parts only it uses (`Hero/Faces.tsx`). A folder that groups several
+independent components stays camelCase (`buttons/`, `copy/`, `three/`, `mainPage/`). Same rule as
+MotoSklejka's `_components/NavBar/` next to `_components/forms/`.
+
 `components.json` aliases point at `@/app/...` so `npx shadcn@latest add` writes `cn()` imports to
 the right place and does not recreate a root `lib/`. Only `ui` still points outside `app`.
 
