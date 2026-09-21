@@ -13,7 +13,7 @@ export function Hero() {
     <div className="relative">
       <div className="relative z-3 flex min-h-dvh flex-col justify-center p-8">
         <Header />
-        <Describe copy="128 teams, one bracket. Thirteen rounds take the map, two maps take the series. Win seven times and the trophy is yours." />
+        <Describe copy="Eight teams, one bracket. Thirteen rounds take the map, two maps take the series. Win three times and the trophy is yours." />
         <div className="mt-10 flex w-full flex-col items-center justify-center gap-8">
           <Button text="Let’s do this!" variant="ct" href={ABOUT_ANCHOR} />
           <Button text="I’m chickening out." variant="tt" href={BAIL_OUT_URL} />
