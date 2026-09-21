@@ -1,64 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Header } from "./components/Header";
+import { RegisterForm } from "./components/RegisterForm/RegisterForm";
 
 export const metadata: Metadata = {
   title: "Sign up — CS2 Tournament",
   description: "Enter your team into the Counter-Strike 2 tournament.",
 };
 
-const ROSTER_SIZE = 5;
-
 export default function RegisterPage() {
   return (
-    <main className="relative z-3 flex min-h-dvh items-center justify-center p-6">
-      <Card className="w-full max-w-[520px]">
+    <section className="relative z-3 my-12 flex min-h-dvh flex-col items-center justify-center gap-8 px-4">
+      <Header />
+
+      <Card className="w-full max-w-[560px]">
         <CardHeader>
-          <CardTitle className="text-2xl uppercase">Sign up your team</CardTitle>
+          <CardTitle className="text-xl uppercase">Roster</CardTitle>
           <CardDescription>
-            Five players, one form. Nicknames must match the ones you play under on the server.
+            Nicknames have to match the ones you play under in-game. Player 1 is the captain — we contact them about
+            match times.
           </CardDescription>
         </CardHeader>
 
         <CardContent>
-          {/* TODO: skeleton only — move to the RegisterForm/useRegisterForm/schema convention */}
-          <form className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="teamName">Team name</Label>
-              <Input id="teamName" name="teamName" placeholder="e.g. Phoenix Five" autoComplete="organization" />
-            </div>
-
-            <fieldset className="flex flex-col gap-3">
-              <legend className="mb-3 text-sm font-medium">Roster</legend>
-
-              {Array.from({ length: ROSTER_SIZE }, (_, i) => {
-                const id = `player-${i + 1}`;
-                return (
-                  <div key={id} className="flex flex-col gap-2">
-                    <Label htmlFor={id}>
-                      Player {i + 1}
-                      {i === 0 && <span className="text-muted-foreground"> (captain)</span>}
-                    </Label>
-                    <Input id={id} name={id} placeholder="nickname" autoComplete="off" />
-                  </div>
-                );
-              })}
-            </fieldset>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-              <Button asChild variant="ghost" size="lg" type="button">
-                <Link href="/">Back</Link>
-              </Button>
-              <Button size="lg" type="submit" disabled>
-                Submit entry
-              </Button>
-            </div>
-          </form>
+          <RegisterForm />
         </CardContent>
       </Card>
-    </main>
+
+      <Link href="/" className="text-sm text-muted-foreground uppercase hover:text-foreground">
+        Back to the tournament
+      </Link>
+    </section>
   );
 }

@@ -76,6 +76,9 @@ a folder only becomes a route once it holds a `page.tsx` or `route.ts`.
 - `components/ui/` — the one thing outside `app`: shadcn registry output. Prettier-ignored, never
   hand-edited
 
+A component used by exactly one route lives in `app/<route>/components/`, next to the `page.tsx` that
+renders it. It moves to `app/components/` the day a second route imports it — not before.
+
 **Folder names follow what the folder is.** A folder that holds one component takes that
 component's name in PascalCase (`Hero/Hero.tsx`, `TapeBorders/TapeBorders.tsx`), together with its
 `styles.module.css` and any parts only it uses (`Hero/Faces.tsx`). A folder that groups several
@@ -141,7 +144,7 @@ query by accessible role/label rather than test IDs.
 SomeForm/
 ├── SomeForm.tsx        # presentation only: FormProvider + fields + submit
 ├── useSomeForm.ts      # useForm + yupResolver, onSubmit (server action), error handling
-├── schema.ts           # FormValues type, defaultValues, yup schema (Polish messages)
+├── schema.ts           # FormValues type, defaultValues, yup schema (English messages)
 └── SomeForm.test.tsx   # Vitest + Testing Library, server action mocked
 ```
 
