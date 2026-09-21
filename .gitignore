@@ -44,3 +44,6 @@ next-env.d.ts
 
 # source 3D models — only the compressed ones in public/models/ go into the repo
 assets/
+
+# Anki exports from the /flashcards skill — study material, not project files
+/flashcards/
