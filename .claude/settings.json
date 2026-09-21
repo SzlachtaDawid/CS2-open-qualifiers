@@ -9,6 +9,17 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "mcp__claude-in-chrome__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Automatyzacja przegladarki wymaga wyraznej zgody. Zapytaj w rozmowie i poczekaj na odpowiedz.\"}}'"
+          }
+        ]
+      }
     ]
   }
 }
